@@ -19,29 +19,29 @@ household projects, and the handful of exceptions that actually need attention.
 
 <table>
   <tr>
-    <td width="50%">
+    <td width="50%" valign="top">
       <img src="docs/screenshots/control-tower.png" alt="Codex Control Tower showing active, recent, and batch task counts"><br>
       <strong>Codex Control Tower</strong><br>
       Exact active, ready-for-me, recent, and batch-job state. If something
       needs a response, the entire screen becomes the alert.
     </td>
-    <td width="50%">
-      <img src="docs/screenshots/glint.gif" alt="Animated pixel character zooming toward the display"><br>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/glint.gif" alt="Animated pixel Codex companion marking a completed task"><br>
       <strong>Glint</strong><br>
-      A small ambient companion with different behavior for idle, working,
-      ready, completed, and shipped states. Completion gets a restrained
-      close-up animation instead of trying to depict tiny keyboard movements.
+      A small ambient companion for Codex, driven by idle, working, ready,
+      completed, and shipped task states. Completion gets a restrained close-up
+      animation instead of trying to depict tiny keyboard movements.
     </td>
   </tr>
   <tr>
-    <td width="50%">
+    <td width="50%" valign="top">
       <img src="docs/screenshots/billable-week.png" alt="Billable Week showing 33.9 hours and 13.9 hours over goal"><br>
       <strong>Billable Week</strong><br>
       Reads the local Timecard data file and shows the active timer, hours left,
       or the amount over goal. Crossing the weekly target gets a brief victory
       state.
     </td>
-    <td width="50%">
+    <td width="50%" valign="top">
       <img src="docs/screenshots/exception-screen.png" alt="Exception Screen giving a CI failure the full display"><br>
       <strong>Exception Screen</strong><br>
       Quiet when everything is healthy; blunt when it is not. Alerts get the
@@ -51,13 +51,13 @@ household projects, and the handful of exceptions that actually need attention.
     </td>
   </tr>
   <tr>
-    <td width="50%">
+    <td width="50%" valign="top">
       <img src="docs/screenshots/landed-prs.png" alt="Landed PR dashboard with trailing 24 hour, 7 day, and 30 day counts"><br>
       <strong>Landed PRs</strong><br>
       Pull requests merged into a GitHub repository over the trailing 24 hours,
       7 days, and 30 days.
     </td>
-    <td width="50%">
+    <td width="50%" valign="top">
       <img src="docs/screenshots/token-use.png" alt="Codex and Claude token totals displayed as two odometers"><br>
       <strong>Token Use</strong><br>
       Thirty-day Codex and Claude usage as aligned odometers. The digits are
@@ -65,7 +65,7 @@ household projects, and the handful of exceptions that actually need attention.
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center">
+    <td colspan="2" align="center" valign="top">
       <img src="docs/screenshots/bin-quest.png" width="512" alt="Bin Quest with progress bars for Jon and KP"><br>
       <strong>Bin Quest</strong><br>
       A deliberately cheerful household scoreboard for working through bins of
