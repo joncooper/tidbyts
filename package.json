@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:pixlet": "./scripts/check-prototype-renders.sh",
+    "docs:screenshots": "./scripts/generate-readme-assets.sh",
     "cf:dry-run": "wrangler deploy --dry-run",
     "db:migrate:local": "wrangler d1 migrations apply tidbyts --local",
     "db:migrate:remote": "wrangler d1 migrations apply tidbyts --remote",

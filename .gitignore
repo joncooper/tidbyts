@@ -9,4 +9,5 @@ renders/
 .local/
 *.webp
 *.gif
+!docs/screenshots/*.gif
 .DS_Store

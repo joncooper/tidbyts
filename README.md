@@ -1,134 +1,191 @@
 # Tidbyts
 
-Private Tidbyt dashboards backed by one Cloudflare Worker, D1 database, and a
-small local prototype snapshot:
+[![CI](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml/badge.svg)](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-56e0d2.svg)](LICENSE)
 
-- **Landed PRs** — merged PRs in `dockett/mono-playground` over 24 hours, 7 days, and 30 days.
-- **Token Use** — aggregate Codex and Claude token use over the same windows.
-- **Bin Quest** — two-person household junk-bin progress, with a mobile web app for updates.
-- **Codex Control Tower** — exact active, ready-for-you, recent, and batch-job state.
-- **Glint** — an idle/blinking, working/dancing companion that zooms for completions and celebrates landed PRs.
-- **Billable Week** — the real weekly total, active timer, remaining hours, or over-goal delta from Timecard.
-- **Exception Screen** — a dedicated all-clear/attention display for collectors, CI, disk, services, and optional AWS budget health.
+Private, subscription-free dashboards for the original 64×32 Tidbyt display.
 
-The deployed phone app is [tidbyts.jon-cooper.workers.dev/bins/](https://tidbyts.jon-cooper.workers.dev/bins/).
+![Four Tidbyt dashboards: Codex Control Tower, Glint, Billable Week, and Exception Screen](docs/screenshots/hero.png)
 
-## No Tidbyt subscription required
+I have four Tidbyts, and I still like the hardware. When the hosted ecosystem
+became uncertain, I wanted a way to keep the displays useful without paying for
+private-app hosting or replacing working firmware.
 
-Tidbyt Plus/Teams is Tidbyt-hosted private-app execution. This project does not use it. Pixlet renders each Starlark app locally, then `pixlet push --installation-id` updates a normal installation in each device's rotation.
+This repository is the system I ended up building. It renders Pixlet apps on my
+Mac, pushes them as ordinary installations, and uses a small Cloudflare Worker
+and D1 database when data needs to move between devices. The result feels like
+a tiny ambient operations wall: code activity, shipped work, billable time,
+household projects, and the handful of exceptions that actually need attention.
 
-That means a local recurring task is responsible for collecting data, rendering the 64×32 images, and pushing them. Cloudflare only stores the small private dataset and serves the mobile UI/API.
+## The displays
 
-## Data flow
+<table>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/control-tower.png" alt="Codex Control Tower showing active, recent, and batch task counts"><br>
+      <strong>Codex Control Tower</strong><br>
+      Exact active, ready-for-me, recent, and batch-job state. If something
+      needs a response, the entire screen becomes the alert.
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/glint.gif" alt="Animated pixel character zooming toward the display"><br>
+      <strong>Glint</strong><br>
+      A small ambient companion with different behavior for idle, working,
+      ready, completed, and shipped states. The completion animation zooms in
+      instead of trying to depict tiny keyboard movements.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/billable-week.png" alt="Billable Week showing 33.9 hours and 13.9 hours over goal"><br>
+      <strong>Billable Week</strong><br>
+      Reads the local Timecard data file and shows the active timer, hours left,
+      or the amount over goal. Crossing the weekly target gets a brief victory
+      state.
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/exception-screen.png" alt="Exception Screen showing CI and stale pull request alerts"><br>
+      <strong>Exception Screen</strong><br>
+      Quiet when everything is healthy; blunt when it is not. It watches
+      collector runs, GitHub Actions, disk space, Worker health, PR freshness,
+      optional endpoints, and an optional AWS budget.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/landed-prs.png" alt="Landed PR dashboard with trailing 24 hour, 7 day, and 30 day counts"><br>
+      <strong>Landed PRs</strong><br>
+      Pull requests merged into a GitHub repository over the trailing 24 hours,
+      7 days, and 30 days.
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/token-use.png" alt="Codex and Claude token totals displayed as two odometers"><br>
+      <strong>Token Use</strong><br>
+      Thirty-day Codex and Claude usage as aligned odometers. The digits are
+      expressed in millions so the two providers remain readable at a glance.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="docs/screenshots/bin-quest.png" width="512" alt="Bin Quest with progress bars for Jon and KP"><br>
+      <strong>Bin Quest</strong><br>
+      A deliberately cheerful household scoreboard for working through bins of
+      accumulated stuff. A small phone-friendly PWA handles updates.
+    </td>
+  </tr>
+</table>
 
-```text
-local Codex/Claude logs ─┐
-authenticated gh CLI ───┼─> local collectors ─> Worker API ─> D1
-                        │                         │
-phones ─────────────────┘                         └─> Pixlet render ─> Tidbyt devices
+The screenshots are generated from the actual Pixlet apps with
+[`scripts/generate-readme-assets.sh`](scripts/generate-readme-assets.sh). They
+are enlarged with nearest-neighbor scaling; no design mockups are standing in
+for the real 64×32 output.
+
+## How it works
+
+```mermaid
+flowchart LR
+  logs["Codex + Claude logs"] --> collectors["Local collectors"]
+  github["GitHub CLI"] --> collectors
+  timecard["Timecard JSON"] --> collectors
+  phones["Bin Quest PWA"] <--> worker["Cloudflare Worker + D1"]
+  collectors --> worker
+  collectors --> snapshot["Private local snapshot"]
+  worker --> pixlet["Pixlet renderer"]
+  snapshot --> pixlet
+  pixlet --> displays["Tidbyt installations"]
 ```
 
-Only timestamps, provider/model identifiers, aggregate token counts, and the three PR counts leave the Mac. Prompts, code, tool calls, transcript text, file paths, PR titles, and PR bodies are never uploaded.
+There are two data paths:
 
-## First physical push
+- Shared state—PR counts, aggregate token usage, and Bin Quest—lives in D1 and
+  is served by a Cloudflare Worker.
+- Machine-local state—Codex activity, Timecard, disk space, and refresh health—
+  stays in an ignored local snapshot and goes directly into Pixlet.
 
-1. In the Tidbyt phone app, open **Settings → General → Get API Key**. Copy the API token and note the device IDs. `pixlet login && pixlet devices` can also list IDs.
-2. Fill the two empty values in `.env.local`:
+Each render is pushed with a stable installation ID, so rerunning the updater
+replaces the existing image instead of filling the device with duplicates. The
+apps can share one rotation or be assigned to dedicated displays.
 
-   ```sh
-   TIDBYT_DEVICE_IDS=device-one,device-two
-   TIDBYT_API_TOKEN=your-api-token
-   ```
+## Design choices
 
-3. Run:
+**No subscription dependency.** This does not use Tidbyt Plus or Teams. Pixlet
+runs locally and pushes completed WebP animations through the device API.
 
-   ```sh
-   ./scripts/refresh.sh
-   ```
+**Stock firmware is fine.** Nothing here requires flashing the display. The
+same rendering pipeline can move to community firmware later if that becomes
+the better home for the hardware.
 
-The `landed-prs`, `token-use`, and `bin-quest` installation IDs will be added to every listed device. Re-running the script updates those installations rather than creating duplicates.
+**Private by default.** Prompts, code, transcript text, tool calls, file paths,
+PR titles, and PR bodies never leave the Mac. The Worker receives timestamps,
+provider/model identifiers, aggregate token counts, and PR totals.
 
-## Bin Quest on phones
+**Failures should still be visible.** Refresh steps are independent. If a data
+collector fails, later safe steps continue so Exception Screen can report the
+failure instead of silently leaving an old dashboard in place.
 
-Generate a one-time setup link locally:
+**The pixels are the constraint.** Every state has a fixed character budget and
+a render test, including long labels and two-digit extremes. Animation is used
+to communicate state, not to make a tiny display busier.
 
-```sh
-./scripts/household-link.sh
+## Running it
+
+You will need Node.js 22+, [Pixlet](https://github.com/tidbyt/pixlet), Wrangler,
+an authenticated GitHub CLI, a Cloudflare account, and a Tidbyt device API key.
+
+```bash
+npm install
+cp .env.example .env.local
 ```
 
-Open or AirDrop that link to each phone. The secret is carried in the URL fragment, which browsers do not send to the server; the app stores it locally and immediately removes it from the address bar. Use the gear to set both names, then add and clear bins. The site can be added to the iPhone Home Screen and leaves a native iOS API path open if a TestFlight app becomes worthwhile later.
+Create a D1 database, put its ID in `wrangler.jsonc`, apply the migration, and
+configure the three Worker secrets:
 
-The 64×32 Tidbyt view shows up to eight bin icons per person. Cleared bins are bright; remaining bins are dim. The numeric fraction always shows the full total.
-
-## Recurring refresh
-
-The Codex automation **Refresh Tidbyt dashboards** runs every 15 minutes. It
-first writes aggregate active/ready/recent Codex task counts, excluding its own
-updater task, then runs the collector/render/push flow. No task titles or
-contents enter the snapshot. Notifications are limited to failed runs.
-
-Refresh steps are independent: a usage, PR, or existing-app failure is recorded
-and the flow continues far enough for Exception Screen to report it when the
-Tidbyt connection itself still works.
-
-Manual components:
-
-```sh
-./scripts/run-usage-collector.sh       # defaults to a 2-hour idempotent lookback
-./scripts/run-pr-collector.sh          # uses the existing authenticated gh CLI
-./scripts/render-apps.sh               # render live WebPs without pushing
-./scripts/push-apps.sh                 # render and push all three apps
-./scripts/run-prototype-collector.sh   # collect Codex, Timecard, disk, and health state
-./scripts/render-prototypes.sh         # render the four local prototype WebPs
-./scripts/push-prototypes.sh           # push only roles configured in .env.local
-./scripts/check-prototype-renders.sh   # render normal, event, and extreme-value states
+```bash
+npx wrangler d1 create tidbyts
+npm run db:migrate:remote
+npx wrangler secret put READ_TOKEN
+npx wrangler secret put INGEST_TOKEN
+npx wrangler secret put HOUSEHOLD_TOKEN
+npm run deploy
 ```
 
-The four prototypes do not install a LaunchAgent. They run inside the same
-15-minute Codex updater as the original dashboards. Assign one display per app
-with `TIDBYT_CONTROL_TOWER_DEVICE_ID`, `TIDBYT_GLINT_DEVICE_ID`,
-`TIDBYT_BILLABLE_WEEK_DEVICE_ID`, and `TIDBYT_EXCEPTION_DEVICE_ID`. Unassigned
-roles render locally but are never pushed. Stock Tidbyt API credentials are
-device-scoped, so each role also accepts a matching `*_API_TOKEN`; the shared
-`TIDBYT_API_TOKEN` remains a fallback for the already configured device.
+Fill in `.env.local` with the Worker URL, matching ingest/read tokens, and the
+device ID and API token. Then run one complete refresh:
 
-Exception Screen always checks the Cloudflare Worker, PR freshness, GitHub
-Actions, Timecard availability, disk space, and recent refresh-step results.
-Additional unauthenticated endpoints can be added with
-`TIDBYTS_HEALTHCHECKS=NAME=https://url,...`. Setting
-`TIDBYTS_AWS_MONTHLY_BUDGET_USD` enables a Cost Explorer check that warns at
-80% and becomes critical at 100%.
+```bash
+./scripts/refresh.sh
+```
 
-For a first token-history backfill, use `./scripts/run-usage-collector.sh --days=30`. D1 primary keys make repeated uploads safe.
+The updater can run from any scheduler. My setup uses a dedicated 15-minute
+Codex desktop automation, so it stays in one task over time and does not require
+a LaunchAgent. The four prototype roles also accept individual device IDs and
+device-scoped tokens when each dashboard gets its own display.
+
+Bin Quest's mobile UI is served from the same Worker. A one-time setup URL puts
+the household token in the URL fragment, stores it locally, and removes it from
+the address bar before normal use.
 
 ## Development
 
-Requirements are Node.js, Pixlet, Wrangler, and an authenticated `gh` CLI. Pixlet is installed on macOS with:
-
-```sh
-brew install tidbyt/tidbyt/pixlet
-```
-
-Useful commands:
-
-```sh
-npm install
+```bash
 npm run types
 npm run typecheck
 npm test
 npm run test:pixlet
 npm run cf:dry-run
-npm run deploy
 ```
 
-`npm test` runs inside Cloudflare's Worker runtime with an isolated local D1 database. Secrets live only in ignored `.dev.vars` and `.env.local` files or as encrypted Cloudflare Worker secrets.
+`npm test` runs the Worker against an isolated local D1 database. The Pixlet
+suite renders normal, event, alert, and maximum-width states for all four local
+dashboards. README images are reproducible with:
 
-## Cloudflare resources
+```bash
+npm run docs:screenshots
+```
 
-- Worker: `tidbyts`
-- URL: `https://tidbyts.jon-cooper.workers.dev`
-- D1 database: `tidbyts`
-- Region: eastern North America
-- Required secrets: `READ_TOKEN`, `INGEST_TOKEN`, `HOUSEHOLD_TOKEN`
+Secrets and generated runtime data are ignored by Git. See `.env.example` and
+`.dev.vars.example` for the complete configuration surface.
 
-The Worker intentionally has no GitHub credential. PR counting happens locally through `gh`, because local rendering is required for the subscription-free Tidbyt path anyway.
+## License
+
+MIT © 2026 Jon Cooper
