@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#111318">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bin Quest">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/bins/styles.css">
+    <title>Bin Quest</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">HOUSE CLEARING</p>
+          <h1>Bin Quest</h1>
+        </div>
+        <button id="settings-button" class="icon-button" aria-label="Settings">⚙</button>
+      </header>
+
+      <section id="login" class="panel auth-panel" hidden>
+        <span class="big-icon">🔐</span>
+        <h2>Enter the household key</h2>
+        <p>This stays on this phone and is only used to update your bins.</p>
+        <form id="login-form">
+          <input id="token" type="password" autocomplete="current-password" required>
+          <button type="submit" class="primary">Unlock</button>
+        </form>
+      </section>
+
+      <section id="dashboard" hidden>
+        <div id="scoreboard" class="scoreboard"></div>
+        <div class="section-heading">
+          <h2>Bins</h2>
+          <span id="status" role="status"></span>
+        </div>
+        <div id="bin-list" class="bin-list"></div>
+      </section>
+    </main>
+
+    <dialog id="add-dialog">
+      <form id="add-form" method="dialog">
+        <h2>Add a bin</h2>
+        <input id="add-member" type="hidden">
+        <label for="add-label">What’s in it? <small>(optional)</small></label>
+        <input id="add-label" maxlength="40" placeholder="Garage books">
+        <div class="dialog-actions">
+          <button value="cancel" class="quiet">Cancel</button>
+          <button value="default" class="primary">Add bin</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="settings-dialog">
+      <form id="settings-form" method="dialog">
+        <h2>Household</h2>
+        <label for="member-a-name">First name</label>
+        <input id="member-a-name" maxlength="12" required>
+        <label for="member-b-name">Second name</label>
+        <input id="member-b-name" maxlength="12" required>
+        <div class="dialog-actions">
+          <button id="forget-key" value="cancel" class="danger">Forget key</button>
+          <button value="default" class="primary">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="member-card-template">
+      <article class="member-card">
+        <div class="member-card-top">
+          <div>
+            <p class="member-name"></p>
+            <p class="member-count"></p>
+          </div>
+          <div class="ring" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="progress"><i></i></div>
+        <button class="add-button">＋ Add bin</button>
+      </article>
+    </template>
+
+    <template id="bin-template">
+      <article class="bin-row">
+        <button class="toggle" aria-label="Toggle dealt status"><span>✓</span></button>
+        <div class="bin-copy">
+          <strong></strong>
+          <small></small>
+        </div>
+        <button class="delete-button" aria-label="Delete bin">×</button>
+      </article>
+    </template>
+
+    <script type="module" src="/bins/app.js"></script>
+  </body>
+</html>
