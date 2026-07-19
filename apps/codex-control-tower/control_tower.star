@@ -29,7 +29,8 @@ def _metric(value, label, color):
         ),
     )
 
-def _attention(count):
+def _attention(count, reason):
+    heading = reason if reason else "NEEDS YOU"
     return render.Root(
         max_age = 900,
         child = render.Box(
@@ -51,9 +52,9 @@ def _attention(count):
                             main_align = "center",
                             cross_align = "center",
                             children = [
-                                render.Text("NEEDS YOU", font = FONT, color = AMBER),
+                                render.Text(heading[:10], font = FONT, color = AMBER),
                                 render.Text(str(count), font = FONT_BIG, color = "#ffffff"),
-                                render.Text("CODEX TASKS", font = FONT, color = "#8290a3"),
+                                render.Text("NEEDS YOU", font = FONT, color = "#8290a3"),
                             ],
                         ),
                     ),
@@ -67,8 +68,9 @@ def main(config):
     warm = _int(config, "warm", 9)
     jobs = _int(config, "jobs", 2)
     needs = _int(config, "needs", 0)
+    reason = config.str("attention_reason") or ""
     if needs > 0:
-        return _attention(needs)
+        return _attention(needs, reason)
 
     return render.Root(
         max_age = 900,

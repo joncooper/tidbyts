@@ -6,10 +6,10 @@ small local prototype snapshot:
 - **Landed PRs** — merged PRs in `dockett/mono-playground` over 24 hours, 7 days, and 30 days.
 - **Token Use** — aggregate Codex and Claude token use over the same windows.
 - **Bin Quest** — two-person household junk-bin progress, with a mobile web app for updates.
-- **Codex Control Tower** — live and recent Codex activity plus batch-job exceptions.
-- **Glint** — a tiny animated working companion that celebrates newly landed PRs.
-- **Billable Week** — the real weekly total and active timer from the local Timecard app.
-- **Exception Screen** — a dedicated all-clear/attention display for local disk and collector health.
+- **Codex Control Tower** — exact active, ready-for-you, recent, and batch-job state.
+- **Glint** — an idle/blinking, working/dancing companion that zooms for completions and celebrates landed PRs.
+- **Billable Week** — the real weekly total, active timer, remaining hours, or over-goal delta from Timecard.
+- **Exception Screen** — a dedicated all-clear/attention display for collectors, CI, disk, services, and optional AWS budget health.
 
 The deployed phone app is [tidbyts.jon-cooper.workers.dev/bins/](https://tidbyts.jon-cooper.workers.dev/bins/).
 
@@ -62,7 +62,14 @@ The 64×32 Tidbyt view shows up to eight bin icons per person. Cleared bins are 
 
 ## Recurring refresh
 
-The Codex automation **Refresh Tidbyt dashboards** runs every 15 minutes. Until Tidbyt credentials are filled in, it refreshes only the D1 data. Once they are present, it automatically runs the complete collector/render/push flow. Notifications are limited to failed runs.
+The Codex automation **Refresh Tidbyt dashboards** runs every 15 minutes. It
+first writes aggregate active/ready/recent Codex task counts, excluding its own
+updater task, then runs the collector/render/push flow. No task titles or
+contents enter the snapshot. Notifications are limited to failed runs.
+
+Refresh steps are independent: a usage, PR, or existing-app failure is recorded
+and the flow continues far enough for Exception Screen to report it when the
+Tidbyt connection itself still works.
 
 Manual components:
 
@@ -74,6 +81,7 @@ Manual components:
 ./scripts/run-prototype-collector.sh   # collect Codex, Timecard, disk, and health state
 ./scripts/render-prototypes.sh         # render the four local prototype WebPs
 ./scripts/push-prototypes.sh           # push only roles configured in .env.local
+./scripts/check-prototype-renders.sh   # render normal, event, and extreme-value states
 ```
 
 The four prototypes do not install a LaunchAgent. They run inside the same
@@ -83,6 +91,13 @@ with `TIDBYT_CONTROL_TOWER_DEVICE_ID`, `TIDBYT_GLINT_DEVICE_ID`,
 roles render locally but are never pushed. Stock Tidbyt API credentials are
 device-scoped, so each role also accepts a matching `*_API_TOKEN`; the shared
 `TIDBYT_API_TOKEN` remains a fallback for the already configured device.
+
+Exception Screen always checks the Cloudflare Worker, PR freshness, GitHub
+Actions, Timecard availability, disk space, and recent refresh-step results.
+Additional unauthenticated endpoints can be added with
+`TIDBYTS_HEALTHCHECKS=NAME=https://url,...`. Setting
+`TIDBYTS_AWS_MONTHLY_BUDGET_USD` enables a Cost Explorer check that warns at
+80% and becomes critical at 100%.
 
 For a first token-history backfill, use `./scripts/run-usage-collector.sh --days=30`. D1 primary keys make repeated uploads safe.
 
@@ -101,6 +116,7 @@ npm install
 npm run types
 npm run typecheck
 npm test
+npm run test:pixlet
 npm run cf:dry-run
 npm run deploy
 ```
