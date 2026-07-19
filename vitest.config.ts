@@ -15,6 +15,7 @@ export default defineConfig({
           READ_TOKEN: "read-test-token",
           INGEST_TOKEN: "ingest-test-token",
           HOUSEHOLD_TOKEN: "household-test-token",
+          GITHUB_REPOSITORY: "dockett/mono-playground",
         },
       },
     })),
