@@ -5,8 +5,6 @@
 
 Private, subscription-free dashboards for the original 64×32 Tidbyt display.
 
-![Four Tidbyt dashboards: Codex Control Tower, Glint, Billable Week, and Exception Screen](docs/screenshots/hero.png)
-
 I have four Tidbyts, and I still like the hardware. When the hosted ecosystem
 became uncertain, I wanted a way to keep the displays useful without paying for
 private-app hosting or replacing working firmware.
@@ -31,8 +29,8 @@ household projects, and the handful of exceptions that actually need attention.
       <img src="docs/screenshots/glint.gif" alt="Animated pixel character zooming toward the display"><br>
       <strong>Glint</strong><br>
       A small ambient companion with different behavior for idle, working,
-      ready, completed, and shipped states. The completion animation zooms in
-      instead of trying to depict tiny keyboard movements.
+      ready, completed, and shipped states. Completion gets a restrained
+      close-up animation instead of trying to depict tiny keyboard movements.
     </td>
   </tr>
   <tr>
@@ -44,9 +42,10 @@ household projects, and the handful of exceptions that actually need attention.
       state.
     </td>
     <td width="50%">
-      <img src="docs/screenshots/exception-screen.png" alt="Exception Screen showing CI and stale pull request alerts"><br>
+      <img src="docs/screenshots/exception-screen.png" alt="Exception Screen giving a CI failure the full display"><br>
       <strong>Exception Screen</strong><br>
-      Quiet when everything is healthy; blunt when it is not. It watches
+      Quiet when everything is healthy; blunt when it is not. Alerts get the
+      whole screen and rotate one at a time, ordered by severity. It watches
       collector runs, GitHub Actions, disk space, Worker health, PR freshness,
       optional endpoints, and an optional AWS budget.
     </td>

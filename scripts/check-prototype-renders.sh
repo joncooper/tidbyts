@@ -40,6 +40,8 @@ pixlet render "$PROJECT_DIR/apps/exception-screen/exception_screen.star" \
 pixlet render "$PROJECT_DIR/apps/exception-screen/exception_screen.star" \
   count=4 label_1="VERYLONGLABEL" value_1="TOOLONGVALUE" severity_1=critical \
   label_2="SECONDALERT" value_2="ALSOOVER" severity_2=warn \
+  label_3="THIRD ALERT" value_3="OFFLINE" severity_3=critical \
+  label_4="FOURTH" value_4="NO DATA" severity_4=warn \
   --output "$OUTPUT_DIR/exception-stack.webp"
 
 echo "Prototype render checks passed: $OUTPUT_DIR"

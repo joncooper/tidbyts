@@ -49,4 +49,10 @@ pixlet render "$PROJECT_DIR/apps/exception-screen/exception_screen.star" \
   "label_2=$(value '.exceptions[1].label // ""')" \
   "value_2=$(value '.exceptions[1].value // ""')" \
   "severity_2=$(value '.exceptions[1].severity // "warn"')" \
+  "label_3=$(value '.exceptions[2].label // ""')" \
+  "value_3=$(value '.exceptions[2].value // ""')" \
+  "severity_3=$(value '.exceptions[2].severity // "warn"')" \
+  "label_4=$(value '.exceptions[3].label // ""')" \
+  "value_4=$(value '.exceptions[3].value // ""')" \
+  "severity_4=$(value '.exceptions[3].severity // "warn"')" \
   --output "$RENDER_DIR/exception-screen.webp"

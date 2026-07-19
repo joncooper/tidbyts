@@ -88,8 +88,8 @@ def _face_sprite(frame, close, celebrating, blink = False):
         visor_1, visor_2, visor_3 = VISOR_B, VISOR_C, VISOR_A
     else:
         visor_1, visor_2, visor_3 = VISOR_C, VISOR_B, VISOR_A
-    sparkle_1 = VISOR_B if celebrating or frame == 2 else BG
-    sparkle_2 = VISOR_A if celebrating or frame == 3 else BG
+    sparkle_1 = VISOR_B if celebrating and (frame == 2 or frame == 4) else BG
+    sparkle_2 = VISOR_A if celebrating and (frame == 3 or frame == 5) else BG
     eye = "#1f6d3b" if blink else "#15202b"
 
     if close:
@@ -167,6 +167,13 @@ def _frame(config, frame, zoom, blink = False):
     else:
         count, label, color = _int(config, "working", 1), "WORKING", "#56e0d2"
     sprite = _sprite(frame % 4, celebrating) if zoom == 0 else _face_sprite(frame, zoom == 2, celebrating, blink)
+    status = [
+        render.Text(str(count), font = FONT_BIG, color = WHITE),
+        render.Text(label, font = FONT, color = color),
+    ]
+    if mode == "working":
+        status.append(render.Box(height = 2))
+        status.append(_activity(frame % 4, color))
     return render.Box(
         color = BG,
         child = render.Row(
@@ -177,11 +184,7 @@ def _frame(config, frame, zoom, blink = False):
                     child = render.Column(
                         main_align = "center",
                         cross_align = "center",
-                        children = [
-                            render.Text(str(count), font = FONT_BIG, color = WHITE),
-                            render.Text(label, font = FONT, color = color),
-                            _activity(frame % 4, color),
-                        ],
+                        children = status,
                     ),
                 ),
             ],
@@ -224,14 +227,12 @@ def main(config):
             ]),
         )
     return render.Root(
-        delay = 500,
+        delay = 650,
         max_age = 900,
         child = render.Animation(children = [
-            _frame(config, 0, 0),
-            _frame(config, 1, 1),
             _frame(config, 2, 2),
             _frame(config, 3, 2),
-            _frame(config, 4, 1),
-            _frame(config, 5, 0),
+            _frame(config, 4, 2, True),
+            _frame(config, 5, 2),
         ]),
     )

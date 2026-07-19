@@ -48,97 +48,92 @@ def _all_clear():
         ),
     )
 
-def _single(config):
-    severity = config.str("severity_1") or "critical"
-    color = _color(severity)
-    label = config.str("label_1") or "LOW DISK"
-    value = config.str("value_1") or "19G FREE"
-    return render.Root(
-        max_age = 900,
-        child = render.Box(
-            color = BG,
-            child = render.Row(children = [
-                render.Box(
-                    width = 15,
-                    color = "#6b2530" if severity == "critical" else "#6a4b20",
-                    child = render.Column(
-                        main_align = "center",
-                        cross_align = "center",
-                        children = [render.Text("!", font = "tom-thumb", color = "#ffffff")],
-                    ),
-                ),
-                render.Box(
-                    width = 49,
-                    child = render.Column(
-                        main_align = "center",
-                        cross_align = "center",
-                        children = [
-                            render.Text(label, font = FONT, color = color),
-                            render.Text(value, font = FONT_BIG, color = "#ffffff"),
-                            render.Text("CHECK NOW", font = FONT, color = "#8390a0"),
-                        ],
-                    ),
-                ),
-            ]),
-        ),
-    )
-
-def _alert_lane(label, value, severity):
+def _alert_frame(label, value, severity, position, count):
     color = _color(severity)
     return render.Box(
-        width = 62,
-        height = 14,
-        color = "#151b25",
-        child = render.Row(
-            cross_align = "center",
-            children = [
-                render.Box(
-                    width = 33,
-                    child = render.Row(children = [
-                        render.Box(width = 3, height = 8, color = color),
-                        render.Text(" " + label[:7], font = FONT, color = "#f7f8fa"),
-                    ]),
+        color = BG,
+        child = render.Row(children = [
+            render.Box(width = 4, color = color),
+            render.Box(
+                width = 60,
+                child = render.Column(
+                    children = [
+                        render.Box(
+                            height = 9,
+                            child = render.Row(
+                                cross_align = "center",
+                                children = [
+                                    render.Box(width = 4),
+                                    render.Box(
+                                        width = 34,
+                                        child = render.Text(label[:10], font = FONT, color = "#f7f8fa"),
+                                    ),
+                                    render.Box(
+                                        width = 18,
+                                        child = render.Column(
+                                            cross_align = "end",
+                                            children = [render.Text("%d/%d" % (position, count), font = FONT, color = "#687687")],
+                                        ),
+                                    ),
+                                    render.Box(width = 4),
+                                ],
+                            ),
+                        ),
+                        render.Box(
+                            height = 23,
+                            child = render.Column(
+                                main_align = "center",
+                                cross_align = "center",
+                                children = [render.Text(value[:8], font = FONT_BIG, color = color)],
+                            ),
+                        ),
+                    ],
                 ),
-                render.Box(
-                    width = 27,
-                    child = render.Column(
-                        cross_align = "end",
-                        children = [render.Text(value[:7], font = FONT, color = color)],
-                    ),
-                ),
-            ],
-        ),
+            ),
+        ]),
     )
 
-def _stack(config, count):
+def _alerts(config, count):
+    frames = [_alert_frame(
+        config.str("label_1") or "LOW DISK",
+        config.str("value_1") or "19G FREE",
+        config.str("severity_1") or "critical",
+        1,
+        count,
+    )]
+    if count == 1:
+        return render.Root(max_age = 900, child = frames[0])
+    frames.append(_alert_frame(
+        config.str("label_2") or "CLOUD",
+        config.str("value_2") or "HIGH",
+        config.str("severity_2") or "warn",
+        2,
+        count,
+    ))
+    if count > 2:
+        frames.append(_alert_frame(
+            config.str("label_3") or "DISK",
+            config.str("value_3") or "LOW",
+            config.str("severity_3") or "warn",
+            3,
+            count,
+        ))
+    if count > 3:
+        frames.append(_alert_frame(
+            config.str("label_4") or "TIMECARD",
+            config.str("value_4") or "NO DATA",
+            config.str("severity_4") or "warn",
+            4,
+            count,
+        ))
     return render.Root(
+        delay = 2400,
         max_age = 900,
-        child = render.Box(
-            color = BG,
-            child = render.Column(
-                main_align = "center",
-                cross_align = "center",
-                children = [
-                    render.Text("%d ALERTS" % count, font = FONT, color = RED),
-                    _alert_lane(
-                        config.str("label_1") or "CI",
-                        config.str("value_1") or "FAILED",
-                        config.str("severity_1") or "critical",
-                    ),
-                    _alert_lane(
-                        config.str("label_2") or "CLOUD",
-                        config.str("value_2") or "HIGH",
-                        config.str("severity_2") or "warn",
-                    ),
-                ],
-            ),
-        ),
+        child = render.Animation(children = frames),
     )
 
 def main(config):
     count = _int(config, "count", 0)
     if count == 0:
         return _all_clear()
-    if count == 1:
-        return _single(config)
-    return _stack(config, count)
+    return _alerts(config, count)
