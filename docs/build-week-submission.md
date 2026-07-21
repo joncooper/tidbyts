@@ -2,9 +2,10 @@
 
 ## Submission fields
 
-- **Title:** Tidbyts — A quiet status wall for Codex
+- **Title:** Tidbyts: A quiet status wall for Codex
 - **Track:** Developer Tools
-- **Tagline:** When something needs me, I just look up.
+- **Tagline:** Four tiny screens show what Codex is doing, what finished, and
+  what needs me. No dashboard. No notification. I just look up.
 - **Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers,
   D1, Pixlet, Starlark, Vitest, Wrangler
 - **YouTube title:** I Gave Codex Four Tiny Screens
@@ -13,9 +14,9 @@
   quiet status wall: one glance tells me what is running, what finished, and
   what needs me.
 - **Repository:** `https://github.com/joncooper/tidbyts`
-- **Live demo after deployment:** `https://tidbyts.jon-cooper.workers.dev/demo/`
-  (verify this exact route before pasting it into Devpost).
+- **Live demo:** https://tidbyts.jon-cooper.workers.dev/demo/
 - **YouTube:** https://youtu.be/Xzd62OyThJ4
+- **Devpost:** https://devpost.com/software/tidbyts-a-quiet-status-wall-for-codex
 
 ## Devpost gallery order
 
@@ -52,6 +53,8 @@ files or unsanitized conversions.
 > minutes. Prompts, code, transcripts, tool calls, and file paths stay out of
 > the shared service.
 >
+> Live demo: https://tidbyts.jon-cooper.workers.dev/demo/
+>
 > Source: https://github.com/joncooper/tidbyts
 >
 > 0:00 Four tiny displays<br>
@@ -63,9 +66,8 @@ files or unsanitized conversions.
 > 2:10 Built with GPT-5.6; refreshed by Codex<br>
 > 2:31 When something needs me, I just look up
 
-Use `renders/build-week/youtube-thumbnail.png` as the upload thumbnail.
-The published description intentionally omits the demo URL until the `/demo/`
-deployment is live; add it above the source link after deployment.
+The published video uses `renders/build-week/youtube-thumbnail.png` as its
+thumbnail. The live demo URL belongs above the source link in the description.
 
 ## Project description
 
@@ -125,9 +127,9 @@ history makes the relevant work easy to review:
 | July 19, 2026 | `bfe1610` | Deterministic Worker tests in CI |
 | July 19, 2026 | `51e10eb` | Glint and Exception Screen polish |
 | July 19, 2026 | `a5fc8b6` | README gallery alignment |
+| July 21, 2026 | `c719f11` | Judge demo, film package, copy, tests, and submission assets |
 
-After committing the July 21 submission package, add that commit to the table.
-Paste the Session ID shown by `/status` into the submission field.
+The submitted Session ID is the July 18 core-build task shown above.
 
 ## Judge testing instructions
 
@@ -212,27 +214,15 @@ the ignored `renders/build-week/stale-pre-polish/` directory.
 - [x] Final chapter starts: 0:00, 0:18, 0:37, 0:58, 1:17, 1:50, 2:10,
   and 2:31.
 
-## External handoff — complete before July 21, 2026 at 8:00 p.m. ET
+## Submission record
 
-The YouTube publication is complete. Repository, deployment, and Devpost steps
-remain user-controlled:
-
-1. [ ] Review, commit, and push this local package; add the July 21 commit hash
-   to the dated evidence table.
-2. [ ] Deploy the Worker and verify
-   `https://tidbyts.jon-cooper.workers.dev/demo/` in a signed-out browser.
-3. [x] Published the final master to YouTube as **Public**, attached the custom
-   thumbnail and English caption track, and passed YouTube's copyright check:
-   https://youtu.be/Xzd62OyThJ4
-4. [ ] Complete YouTube's one-time channel verification so external links in
-   the description become clickable; after deployment, add the live demo URL.
-5. [ ] Put the final live-demo and YouTube URLs into the Devpost fields.
-6. [ ] Return to the July 18 core-build task, run `/status`, and confirm its
-   Session ID is `019f76ab-6b0a-7d73-a7dd-7e3bc30bb31f`; paste that value into
-   Devpost alongside model `gpt-5.6-sol`.
-7. [ ] Select **Developer Tools**, paste the project description and repository
-   URL, add the gallery in the order above, and confirm the video audibly
-   explains both the product and GPT-5.6 use.
-8. [ ] If keeping the repository private, share it with `testing@devpost.com`
-   and `build-week-event@openai.com`; otherwise retain the included MIT license.
-9. [ ] Submit before **8:00 p.m. ET / 5:00 p.m. PT**.
+- [x] Public repository pushed at commit `c719f11` with an MIT license and
+  passing CI.
+- [x] Static judge demo deployed and verified in signed-out desktop and mobile
+  browsers, including every screen and state control.
+- [x] Final 2:41 film published as **Public** with its custom 16:9 thumbnail,
+  English captions, chapters, and a clean copyright check.
+- [x] Devpost entry submitted to **Developer Tools** with the live demo, public
+  film, repository, testing instructions, and core-build Session ID.
+- [x] Submission published July 21, 2026 at 7:10 p.m. ET, before the 8:00 p.m.
+  ET deadline: https://devpost.com/software/tidbyts-a-quiet-status-wall-for-codex

@@ -113,7 +113,8 @@ the same route publicly accessible. The complete submission copy, evidence
 checklist, and testing instructions live in
 [`docs/build-week-submission.md`](docs/build-week-submission.md).
 
-[Watch the 2:41 demo film: **I Gave Codex Four Tiny Screens**](https://youtu.be/Xzd62OyThJ4).
+[Open the live judge demo](https://tidbyts.jon-cooper.workers.dev/demo/) ·
+[Watch the 2:41 film: **I Gave Codex Four Tiny Screens**](https://youtu.be/Xzd62OyThJ4)
 
 ## Built with Codex, kept current by Codex
 
