@@ -1,19 +1,18 @@
-# Tidbyts
+# Tidbyts — A quiet status wall for Codex
 
 [![CI](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml/badge.svg)](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-56e0d2.svg)](LICENSE)
 
-Private, subscription-free dashboards for the original 64×32 Tidbyt display.
+*When something needs me, I just look up.*
 
-I have four Tidbyts, and I still like the hardware. When the hosted ecosystem
-became uncertain, I wanted a way to keep the displays useful without paying for
-private-app hosting or replacing working firmware.
+I still love these little screens, so I gave four of them a second life. They
+show what Codex is doing, what just finished, how the computer is doing, and the
+one problem that needs me. No phone, no dashboard, no notification in my pocket.
 
-This repository is the system I ended up building. It renders Pixlet apps on my
-Mac, pushes them as ordinary installations, and uses a small Cloudflare Worker
-and D1 database when data needs to move between devices. The result feels like
-a tiny ambient operations wall: code activity, shipped work, billable time,
-household projects, and the handful of exceptions that actually need attention.
+Codex has two jobs in this project. It helped me build Tidbyts, then became the
+recurring local automation that checks the system and refreshes the wall. A
+small Cloudflare service handles only content-free usage records, pull-request
+totals, and the household score.
 
 ## The displays
 
@@ -22,15 +21,15 @@ household projects, and the handful of exceptions that actually need attention.
     <td width="50%" valign="top">
       <img src="docs/screenshots/control-tower.png" alt="Codex Control Tower showing active, recent, and batch task counts"><br>
       <strong>Codex Control Tower</strong><br>
-      Exact active, ready-for-me, recent, and batch-job state. If something
-      needs a response, the entire screen becomes the alert.
+      Shows what Codex is doing now, what recently finished, which background
+      jobs are running, and whether a task needs me. When one does, the whole
+      screen becomes the alert.
     </td>
     <td width="50%" valign="top">
       <img src="docs/screenshots/glint.gif" alt="Animated pixel Codex companion marking a completed task"><br>
       <strong>Glint</strong><br>
-      A small ambient companion for Codex, driven by idle, working, ready,
-      completed, and shipped task states. Completion gets a restrained close-up
-      animation instead of trying to depict tiny keyboard movements.
+      Glint works when Codex works, waits when it needs me, and celebrates a
+      finish. Its animation stays restrained enough to live in the room.
     </td>
   </tr>
   <tr>
@@ -79,6 +78,61 @@ The screenshots are generated from the actual Pixlet apps with
 are enlarged with nearest-neighbor scaling; no design mockups are standing in
 for the real 64×32 output.
 
+## On the wall
+
+These are the same views running on real Tidbyt hardware in my office. The
+software renders are useful for inspection; the photographs show the actual
+ambient scale and the restraint of the displays in the room.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/hardware/codex-control-tower-on-hardware.jpg" alt="Codex Control Tower running on a real Tidbyt display"><br>
+      A local Codex automation keeps this Tidbyt current.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/hardware/glint-working-on-hardware.jpg" alt="Glint showing two Codex tasks working on a real Tidbyt display"><br>
+      Glint shows when work is moving without opening another dashboard.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top">
+      <img src="docs/screenshots/hardware/all-clear-on-hardware.jpg" alt="A real Tidbyt display showing All Clear, Systems OK"><br>
+      When nothing needs attention, the display stays calm.
+    </td>
+  </tr>
+</table>
+
+## Build Week judge demo
+
+The Worker serves a hardware-free interactive product tour at `/demo/`. It uses
+the same Pixlet output shown above, needs no account or private metrics, and lets
+reviewers switch through the developer-tool states without owning a Tidbyt. The
+committed source is in [`public/demo/`](public/demo/index.html); deployment makes
+the same route publicly accessible. The complete submission copy, evidence
+checklist, and testing instructions live in
+[`docs/build-week-submission.md`](docs/build-week-submission.md).
+
+[Watch the 2:41 demo film: **I Gave Codex Four Tiny Screens**](https://youtu.be/Xzd62OyThJ4).
+
+## Built with Codex, kept current by Codex
+
+**Tidbyts — A quiet status wall for Codex** is a Developer Tools entry for
+OpenAI Build Week. I built it with Codex Desktop and GPT-5.6 Sol in the July 18
+core-build session `019f76ab-6b0a-7d73-a7dd-7e3bc30bb31f`; the session metadata
+records `gpt-5.6-sol`. Codex helped me connect the collectors, Worker/D1 path,
+and Pixlet apps, then test working, ready, healthy, and failure states at the
+real 64×32 resolution.
+
+I made the product calls: private work stays local, an exception earns the whole
+screen, and every view has to make sense from across the room. Codex then takes
+on its second job. In normal use, a continuing local automation runs the refresh
+loop every fifteen minutes. I can teach that same task another check as my setup
+changes without making the displays any busier.
+
+**Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers, D1,
+Pixlet, Starlark, Vitest, and Wrangler.
+
 ## How it works
 
 ```mermaid
@@ -96,8 +150,8 @@ flowchart LR
 
 There are two data paths:
 
-- Shared state—PR counts, aggregate token usage, and Bin Quest—lives in D1 and
-  is served by a Cloudflare Worker.
+- Shared state—small usage records, pull-request totals, and explicitly entered
+  Bin Quest progress—lives in D1 and is served by a Cloudflare Worker.
 - Machine-local state—Codex activity, Timecard, disk space, and refresh health—
   stays in an ignored local snapshot and goes directly into Pixlet.
 
@@ -114,9 +168,12 @@ runs locally and pushes completed WebP animations through the device API.
 same rendering pipeline can move to community firmware later if that becomes
 the better home for the hardware.
 
-**Private by default.** Prompts, code, transcript text, tool calls, file paths,
-PR titles, and PR bodies never leave the Mac. The Worker receives timestamps,
-provider/model identifiers, aggregate token counts, and PR totals.
+**Private by default.** Tidbyts never copies prompts, code, transcript text,
+tool calls, file paths, PR titles, or PR bodies into its Worker, D1 database, or
+Tidbyt payloads. The Worker receives small usage records—timestamps,
+provider/model identifiers, and token counts—plus PR totals and explicitly
+entered Bin Quest progress. Usage rows are aggregated when the dashboards read
+them.
 
 **Failures should still be visible.** Refresh steps are independent. If a data
 collector fails, later safe steps continue so Exception Screen can report the
@@ -128,8 +185,11 @@ to communicate state, not to make a tiny display busier.
 
 ## Running it
 
-You will need Node.js 22+, [Pixlet](https://github.com/tidbyt/pixlet), Wrangler,
-an authenticated GitHub CLI, a Cloudflare account, and a Tidbyt device API key.
+The full local setup is tested on macOS with Codex Desktop, Node.js 22+,
+[Pixlet](https://github.com/tidbyt/pixlet), `jq`, `sqlite3`, Wrangler, and an
+authenticated GitHub CLI. A live installation also needs a Cloudflare account
+and Tidbyt device API key. The Worker and hardware-free demo work in any modern
+browser.
 
 ```bash
 npm install
@@ -155,16 +215,28 @@ device ID and API token. Then run one complete refresh:
 ./scripts/refresh.sh
 ```
 
-The updater can run from any scheduler. My setup uses a dedicated 15-minute
-Codex desktop automation, so it stays in one task over time and does not require
-a LaunchAgent. The four prototype roles also accept individual device IDs and
-device-scoped tokens when each dashboard gets its own display.
+In my normal setup, one Codex Desktop automation runs every fifteen minutes.
+Keeping the updater in the same continuing task means I can keep teaching it
+what to watch as the system evolves. A conventional scheduler can run the same
+refresh script if preferred. The four prototype roles also accept individual
+device IDs and device-scoped tokens when each dashboard gets its own display.
 
 Bin Quest's mobile UI is served from the same Worker. A one-time setup URL puts
 the household token in the URL fragment, stores it locally, and removes it from
 the address bar before normal use.
 
 ## Development
+
+Judges can run the static demo without rebuilding any Pixlet assets:
+
+```bash
+npm ci
+npm run dev
+# open http://localhost:8787/demo/
+```
+
+The checked-in demo assets are ready to use; a Tidbyt, API credential, and
+local Codex history are not required for this review path.
 
 ```bash
 npm run types

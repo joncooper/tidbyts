@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore Tidbyts: four tiny displays that show what Codex is doing, what finished, and what needs you.">
+    <title>Tidbyts — when something needs me, I just look up</title>
+    <link rel="stylesheet" href="/demo/styles.css">
+  </head>
+  <body>
+    <main id="top">
+      <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="Tidbyts home">TIDBYTS</a>
+        <a class="source-link" href="https://github.com/joncooper/tidbyts">View source <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="kicker">FOUR TINY SCREENS · ONE LOCAL CODEX AUTOMATION</p>
+          <h1 id="page-title">When something needs me, I just look up.</h1>
+          <p class="lede">Codex can be working on several tasks while I’m focused somewhere else. Tidbyts turns four small displays into a quiet status wall, so I can see what’s running, what finished, and what needs me.</p>
+          <p class="trust-line"><span>Local operator</span><span>Private by default</span><span>64×32 pixels</span></p>
+        </div>
+
+        <div class="hero-product" aria-label="Four real Tidbyts Pixlet renders">
+          <p class="product-label"><span aria-hidden="true"></span> REAL PIXLET RENDERS</p>
+          <div class="screen-wall">
+            <figure class="hero-screen">
+              <div><img src="/demo/assets/control-tower-active.webp" alt="Codex Control Tower showing current work"></div>
+              <figcaption>Codex</figcaption>
+            </figure>
+            <figure class="hero-screen">
+              <div><img src="/demo/assets/exception-healthy.webp" alt="System monitor showing that every check is healthy"></div>
+              <figcaption>System</figcaption>
+            </figure>
+            <figure class="hero-screen">
+              <div><img src="/demo/assets/control-tower-attention.webp" alt="Codex Control Tower showing that one task needs a response"></div>
+              <figcaption>Needs me</figcaption>
+            </figure>
+            <figure class="hero-screen">
+              <div><img src="/demo/assets/landed-prs.png" alt="Pull requests landed over three time windows"></div>
+              <figcaption>Delivery</figcaption>
+            </figure>
+          </div>
+          <p class="product-proof">The same output that runs on a Tidbyt. No hardware or account needed here.</p>
+        </div>
+      </section>
+
+      <section class="demo" aria-labelledby="demo-title">
+        <header class="demo-heading">
+          <p class="kicker">EXPLORE THE WALL</p>
+          <h2 id="demo-title">See the wall in action.</h2>
+          <p>Pick a screen, then switch through what it can show. Every image comes straight from the same software that drives the hardware.</p>
+        </header>
+
+        <div class="tour-grid">
+          <div class="display-stage">
+            <div class="display-bezel">
+              <div id="pixel-surface" class="pixel-surface">
+                <img id="state-image" src="/demo/assets/control-tower-active.webp" alt="Codex Control Tower showing current, recent, and background work">
+                <div id="architecture" class="architecture" hidden aria-label="Tidbyts privacy boundary">
+                  <p class="architecture-label">WHAT STAYS WHERE</p>
+                  <div class="arch-node arch-local"><strong>Local Codex</strong><span>watches the work</span></div>
+                  <span class="arch-arrow" aria-hidden="true">→</span>
+                  <div class="arch-boundary">
+                    <div class="arch-lane arch-private"><strong>STAYS LOCAL</strong><span>prompts · code · paths</span></div>
+                    <div class="arch-lane arch-shared"><strong>OPTIONAL SHARED</strong><span>usage · PR totals</span></div>
+                  </div>
+                  <span class="arch-arrow" aria-hidden="true">→</span>
+                  <div class="arch-node arch-display"><strong>64×32</strong><span>signal only</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls" role="tablist" aria-label="Signals on the Tidbyts wall">
+            <button id="state-tab-control" type="button" role="tab" aria-selected="true" aria-controls="state-copy" tabindex="0" data-state="control">Codex</button>
+            <button id="state-tab-exception" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="exception">System</button>
+            <button id="state-tab-glint" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="glint">Glint</button>
+            <button id="state-tab-delivery" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="delivery">Delivery</button>
+            <button id="state-tab-privacy" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="privacy">Privacy</button>
+          </div>
+
+          <div id="variant-controls" class="variant-controls" aria-label="Examples for this signal"></div>
+          <article id="state-copy" class="state-copy" role="tabpanel" aria-labelledby="state-tab-control" aria-live="polite"></article>
+          <p id="display-caption" class="caption">Rendered from the same Pixlet apps that run on a Tidbyt. No mockups.</p>
+        </div>
+      </section>
+
+      <section class="proof" aria-label="How to test Tidbyts">
+        <div>
+          <p class="kicker">NO TIDBYT? NO PROBLEM.</p>
+          <h2>Test the work, not the hardware.</h2>
+          <p>This tour is completely static. The repository includes sample data, unit tests, and Pixlet render checks, so anyone can review the real product without a device, login, API key, or private metrics.</p>
+        </div>
+        <pre aria-label="Commands to test Tidbyts"><code>npm ci
+npm test
+npm run test:pixlet
+npm run demo:assets</code></pre>
+      </section>
+    </main>
+    <footer><strong>TIDBYTS</strong><span>When something needs me, I just look up.</span></footer>
+    <script type="module" src="/demo/app.js"></script>
+  </body>
+</html>

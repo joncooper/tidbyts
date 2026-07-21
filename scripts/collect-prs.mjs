@@ -5,7 +5,7 @@ import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 const DAY_MS = 24 * 60 * 60 * 1000;
-const REPOSITORY = process.env.TIDBYTS_GITHUB_REPOSITORY || "dockett/mono-playground";
+const REPOSITORY = process.env.TIDBYTS_GITHUB_REPOSITORY || "joncooper/tidbyts";
 
 async function mergedCount(since) {
   const query = `repo:${REPOSITORY} is:pr is:merged merged:>=${since.toISOString()}`;

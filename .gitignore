@@ -10,4 +10,6 @@ renders/
 *.webp
 *.gif
 !docs/screenshots/*.gif
+!public/demo/assets/*.webp
+!public/demo/assets/*.gif
 .DS_Store

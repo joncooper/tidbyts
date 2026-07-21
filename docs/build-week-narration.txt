@@ -1,0 +1,60 @@
+## four-screens
+
+[conversational]
+I have four little pixel displays around my office. They used to show weather
+and scores. I gave them a second life. Now they tell me what Codex is doing,
+what just finished, and when something actually needs me. They ask almost
+nothing of me: no phone, no tab, and no notification buzzing in my pocket.
+
+## the-idea
+
+I call it Tidbyts: a quiet status wall for Codex, built from the original
+Tidbyt displays. Each screen does one job. Instead of cramming in a dashboard,
+it shows one useful fact I can read from across the room. At this size, you
+cannot hide behind charts. The screen has to know what matters.
+
+## the-local-agent
+
+Codex has two jobs here. First, it helped me build Tidbyts. Then it became the
+recurring local automation behind the pixels. Every fifteen minutes, it wakes
+up on my Mac, checks my coding tasks and the computer, turns the results into
+fresh screens, and sends them to the displays. Most of the time it finds
+nothing urgent, which is exactly what I want.
+
+## visible-work
+
+Control Tower tells me what Codex is working on, what happened recently, which
+background jobs are still running, and what needs a reply. Glint turns that same
+information into a tiny character—working, ready, or celebrating a finish—so I
+can see progress without being pulled back into another screen.
+
+## evolving-monitor
+
+[with quiet emphasis]
+The display I care about most is Exception Screen. When everything is healthy,
+it stays quiet. But if a software build fails, free disk space gets low, a
+watched service disappears, cloud data goes stale, or spending approaches a
+limit, that problem takes over the screen. Because the Codex automation runs
+locally, I can teach it a new check whenever my setup changes. The pixels stay
+simple even as the monitor behind them grows. This week that might be a
+software build. Next month it could be a new service or a budget.
+
+## more-signals
+
+Other displays track finished work, AI usage, billable hours, and even a
+household clean-out. The private part stays private: prompts, code, files, and
+transcripts never leave my Mac. The optional shared service gets only small,
+content-free usage records, merged-PR totals, and a household score.
+
+## build-week
+
+I built Tidbyts for OpenAI Build Week with Codex running GPT-5.6. Codex helped
+connect the checks on my Mac to the software that draws the screens, then helped
+test the awkward edges of a display just sixty-four pixels wide. That was its
+first job. Its second is the recurring automation that runs the wall.
+
+## close
+
+[warmly]
+Four old Tidbyts, one local Codex automation, and far fewer trips through
+dashboards. When something needs me, I just look up.

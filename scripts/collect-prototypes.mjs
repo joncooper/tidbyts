@@ -187,7 +187,7 @@ function collectCi(now) {
   if (process.env.TIDBYTS_MONITOR_CI === "0") {
     return { configured: false, available: true, failing: false };
   }
-  const repository = process.env.TIDBYTS_GITHUB_REPOSITORY || "dockett/mono-playground";
+  const repository = process.env.TIDBYTS_GITHUB_REPOSITORY || "joncooper/tidbyts";
   try {
     const output = execFileSync(
       "gh",

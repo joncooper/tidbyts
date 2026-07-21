@@ -8,7 +8,7 @@
 	],
 	"workers_dev": true,
 	"vars": {
-		"GITHUB_REPOSITORY": "dockett/mono-playground"
+		"GITHUB_REPOSITORY": "joncooper/tidbyts"
 	},
   "secrets": {
     "required": [

@@ -97,7 +97,7 @@ describe("tidbyts worker", () => {
     );
     expect(response.status).toBe(200);
     await expect(json(response)).resolves.toMatchObject({
-      repository: "dockett/mono-playground",
+      repository: "joncooper/tidbyts",
       trailing_24h: 4,
       trailing_7d: 17,
       trailing_30d: 43,
