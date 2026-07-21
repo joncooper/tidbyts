@@ -75,6 +75,13 @@ The Creator build writes these ignored outputs under `renders/build-week/`:
   tool versions, final media specs, and SHA-256 checksums
 - `narration/creator-manifest.json` — the chapter-level accepted-take cache
 
+To rebuild only the crop-safe YouTube/Devpost thumbnail from the checked-in
+Control Tower render, without touching the accepted film or narration, run:
+
+```bash
+node scripts/build-build-week-video.mjs --thumbnail-only
+```
+
 Final publication master:
 
 - Public video: https://youtu.be/Xzd62OyThJ4

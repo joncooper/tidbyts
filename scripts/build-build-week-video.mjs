@@ -261,19 +261,30 @@ async function writeGallerySlide(path, frames, fontFile) {
 async function writeYoutubeThumbnail(path, screen, fontFile) {
   await run("magick", [
     "-size", "1280x720", "xc:#071019",
-    "-fill", "#123631", "-stroke", "none", "-draw", "rectangle 850,0 1280,720",
-    "-fill", "#142D45", "-draw", "rectangle 0,626 620,720",
-    "-fill", "#0D1B29", "-draw", "roundrectangle 550,160 1240,560 34,34",
-    "-fill", "#020508", "-draw", "roundrectangle 575,185 1215,535 20,20",
-    "(", screen, "-filter", "point", "-resize", "600x300!", ")", "-geometry", "+595+210", "-composite",
+    "-fill", "#123631", "-stroke", "none", "-draw", "rectangle 880,0 1280,720",
+    "-fill", "#142D45", "-draw", "rectangle 160,626 1120,720",
+    "-fill", "#0D1B29", "-draw", "roundrectangle 560,160 1120,560 34,34",
+    "-fill", "#020508", "-draw", "roundrectangle 580,185 1100,535 20,20",
+    "(", screen, "-filter", "point", "-resize", "480x240!", ")", "-geometry", "+600+240", "-composite",
     "-font", fontFile, "-gravity", "NorthWest",
-    "-fill", "#69E7EA", "-pointsize", "24", "-annotate", "+70+86", "TIDBYTS × CODEX",
-    "-fill", "#F6F2E8", "-pointsize", "92", "-annotate", "+66+190", "JUST",
-    "-annotate", "+66+304", "LOOK",
-    "-fill", "#B6ED62", "-annotate", "+66+418", "UP.",
-    "-fill", "#A7B1BF", "-pointsize", "24", "-annotate", "+70+650", "THE STATUS WALL THAT KNOWS WHAT MATTERS",
+    "-fill", "#69E7EA", "-pointsize", "24", "-annotate", "+180+86", "TIDBYTS × CODEX",
+    "-fill", "#F6F2E8", "-pointsize", "88", "-annotate", "+176+190", "JUST",
+    "-annotate", "+176+304", "LOOK",
+    "-fill", "#B6ED62", "-annotate", "+176+418", "UP.",
+    "-fill", "#A7B1BF", "-pointsize", "24", "-annotate", "+180+650", "THE STATUS WALL THAT KNOWS WHAT MATTERS",
+    "-strip",
     path,
   ]);
+}
+
+async function buildThumbnailOnly() {
+  await requireCommand("magick");
+  const screen = join(demoAssetsDirectory, "control-tower-attention.webp");
+  if (!(await exists(screen))) fail("Run npm run demo:assets before building the thumbnail.");
+  await mkdir(outputDirectory, { recursive: true });
+  const thumbnail = join(outputDirectory, "youtube-thumbnail.png");
+  await writeYoutubeThumbnail(thumbnail, screen, await chooseFont());
+  console.log(`YouTube thumbnail ready: ${thumbnail}`);
 }
 
 async function rasterizeFirstFrame(source, destination) {
@@ -1188,12 +1199,18 @@ async function buildVideo({ localVoice, reuseNarration }) {
 
 async function main() {
   const options = new Set(process.argv.slice(2));
-  const supportedOptions = new Set(["--assets-only", "--local-voice", "--reuse-narration"]);
+  const supportedOptions = new Set(["--assets-only", "--local-voice", "--reuse-narration", "--thumbnail-only"]);
   const unknownOptions = [...options].filter((option) => !supportedOptions.has(option));
   if (unknownOptions.length > 0) fail(`Unknown option${unknownOptions.length === 1 ? "" : "s"}: ${unknownOptions.join(", ")}`);
   const assetsOnly = options.has("--assets-only");
   const localVoice = options.has("--local-voice");
   const reuseNarration = options.has("--reuse-narration");
+  const thumbnailOnly = options.has("--thumbnail-only");
+  if (thumbnailOnly) {
+    if (assetsOnly || localVoice || reuseNarration) fail("--thumbnail-only cannot be combined with another option.");
+    await buildThumbnailOnly();
+    return;
+  }
   await prepareDemoAssets();
   if (assetsOnly) return;
   await buildVideo({ localVoice, reuseNarration });

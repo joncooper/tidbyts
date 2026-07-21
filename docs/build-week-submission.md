@@ -4,7 +4,7 @@
 
 - **Title:** Tidbyts: A quiet status wall for Codex
 - **Track:** Developer Tools
-- **Tagline:** Four tiny screens show what Codex is doing, what finished, and
+- **Tagline:** Four tiny screens show what Codex is doing, what just finished, and
   what needs me. No dashboard. No notification. I just look up.
 - **Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers,
   D1, Pixlet, Starlark, Vitest, Wrangler
@@ -207,8 +207,9 @@ the ignored `renders/build-week/stale-pre-polish/` directory.
 - [x] Captions: 56 forced-aligned cues, 1.420–5.221 seconds each, no overlaps,
   maximum two lines and 42 characters per line. SRT SHA-256:
   `12716eb98409d0369b67adaae6904282af51eabdbdf677e3daca63d639a010d1`.
-- [x] Thumbnail: 1280×720, fully opaque and readable at 320×180. SHA-256:
-  `353bf4431f306f7b9a9c75c719b70b070275bf9d3217a8e5cd436242cf413244`.
+- [x] Thumbnail: 1280×720, fully opaque, readable at 320×180, and crop-safe
+  inside Devpost's 4:3 player. SHA-256:
+  `7113151a932367ab140554b0cc8d6cc9c65de79d72c4589ad3a071986b7d27eb`.
 - [x] Real-hardware gallery derivatives are tightly cropped, visually checked,
   and contain no GPS, device, capture-time, EXIF, XMP, or ICC metadata.
 - [x] Final chapter starts: 0:00, 0:18, 0:37, 0:58, 1:17, 1:50, 2:10,
