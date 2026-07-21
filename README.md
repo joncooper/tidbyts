@@ -1,20 +1,23 @@
-# Tidbyts — A quiet status wall for Codex
+# Tidbyts — Codex status apps for Tidbyt
 
 [![CI](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml/badge.svg)](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-56e0d2.svg)](LICENSE)
 
-*When something needs me, I just look up.*
+*[Tidbyt](https://tidbyt.com/) made the hardware. Tidbyts is the software layer I
+built for four original Tidbyt displays I already owned.*
 
-I still love these little screens, so I gave four of them a second life. They
-show what Codex is doing, what just finished, how the computer is doing, and the
-one problem that needs me. No phone, no dashboard, no notification in my pocket.
+The name is a play on “tidbits”: small pieces of useful state, delivered through
+Tidbyt. For Build Week, I used Codex to learn Tidbyt’s Pixlet/Starlark app stack,
+build new 64×32 views, and push fresh renders through the official device API.
+Codex then stayed on as the recurring local automation that decides what matters,
+checks the system, and refreshes the wall.
 
-Codex has two jobs in this project. It helped me build Tidbyts, then became the
-recurring local automation that checks the system and refreshes the wall. A
-small Cloudflare service handles only content-free usage records, pull-request
-totals, and the household score.
+The result shows what Codex is doing, what just finished, how the computer is
+doing, and the one problem that needs me. No phone, no dashboard, no notification
+in my pocket. A small Cloudflare service handles only content-free usage records,
+pull-request totals, and the household score.
 
-## The displays
+## What Tidbyts adds
 
 <table>
   <tr>

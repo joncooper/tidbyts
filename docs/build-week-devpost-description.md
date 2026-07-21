@@ -1,3 +1,15 @@
+### Four original Tidbyt displays, one new job
+
+[Tidbyt](https://tidbyt.com/) made these displays and still runs the platform
+behind them. I already owned four original devices, cycling through weather,
+sports, and the existing Tidbyt app library.
+
+**Tidbyts is my software project, not the hardware.** The name is a play on
+“tidbits”: small pieces of useful information delivered through Tidbyt. For
+Build Week, I used Codex to learn Tidbyt’s Pixlet/Starlark app stack, build new
+64×32 views, push them through the official device API, and stay on as the local
+automation that keeps the wall current.
+
 ### I wanted the answer from across the room
 
 Codex can be working on several tasks while I’m focused somewhere else. One may
@@ -8,8 +20,7 @@ GitHub, and system monitors.
 I didn’t want another dashboard. I wanted one useful answer from across the
 room: **does anything need me right now?**
 
-I had four original Tidbyt displays around my office that mostly showed weather
-and scores. Tidbyts gives them a second life as a quiet status wall for
+Those four displays now have a second life as a quiet status wall for
 AI-assisted development.
 
 ### Four tiny screens, one job at a time
@@ -93,3 +104,6 @@ give the room one clear signal only when attention is useful.
 
 Four old displays are enough to make that idea tangible. When something needs
 me, I just look up.
+
+*Tidbyt is the existing hardware and platform; Tidbyts is this independent
+Codex-powered software project.*

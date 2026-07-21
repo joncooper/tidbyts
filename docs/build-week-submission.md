@@ -2,17 +2,17 @@
 
 ## Submission fields
 
-- **Title:** Tidbyts: A quiet status wall for Codex
+- **Title:** Tidbyts: Codex status apps for Tidbyt
 - **Track:** Developer Tools
-- **Tagline:** Four tiny screens show what Codex is doing, what just finished, and
-  what needs me. No dashboard. No notification. I just look up.
+- **Tagline:** Codex builds and refreshes tiny status apps for four original
+  Tidbyt displays I already owned—what’s running, what finished, and what needs me.
 - **Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers,
   D1, Pixlet, Starlark, Vitest, Wrangler
 - **YouTube title:** I Gave Codex Four Tiny Screens
-- **YouTube description opener:** Codex can be working on several tasks while
-  I’m focused somewhere else. Tidbyts turns four old pixel displays into a
-  quiet status wall: one glance tells me what is running, what finished, and
-  what needs me.
+- **YouTube description opener:** Tidbyt made the displays and still runs the
+  platform. I already owned four original units. Tidbyts is my Build Week
+  software project: Codex learned Tidbyt’s Pixlet/Starlark stack, built the
+  views, and now runs the local refresh loop.
 - **Repository:** `https://github.com/joncooper/tidbyts`
 - **Live demo:** https://tidbyts.jon-cooper.workers.dev/demo/
 - **YouTube:** https://youtu.be/Xzd62OyThJ4
@@ -20,8 +20,8 @@
 
 ## Devpost gallery order
 
-Lead with the polished software view, then use the real-hardware photographs as
-proof that the product runs in the room:
+Lead with a real-hardware photograph, then the polished software view, as proof
+that this independent software project runs on original Tidbyt hardware:
 
 1. `docs/screenshots/hardware/all-clear-on-hardware.jpg` — “When nothing needs
    attention, the display stays calm.”
@@ -43,9 +43,10 @@ files or unsanitized conversions.
 
 **Description:**
 
-> Codex can be working on several tasks while I’m focused somewhere else.
-> Tidbyts turns four old pixel displays into a quiet status wall: one glance
-> tells me what is running, what finished, and what needs me.
+> Tidbyt made the displays and still runs the platform. I already owned four
+> original units. Tidbyts is my Build Week software project: Codex learned
+> Tidbyt’s Pixlet/Starlark stack, built the views, and now runs the local refresh
+> loop. One glance tells me what is running, what finished, and what needs me.
 >
 > Codex had two jobs here. First, it helped me build the Worker, collectors,
 > Pixlet apps, and tests with GPT-5.6. Its second job is a recurring local
@@ -71,10 +72,15 @@ thumbnail. The live demo URL belongs above the source link in the description.
 
 ## Project description
 
-Codex can be working on several tasks while I’m focused somewhere else. One
-may be running, waiting for a decision, or quietly stuck. Tidbyts turns
-four old pixel displays into a quiet status wall: one glance tells me what is
-running, what finished, and what needs me.
+Tidbyt made the hardware and still runs the platform. I already owned four
+original 64×32 displays. Tidbyts is my independent software project: a local
+Codex automation, Pixlet/Starlark apps, collectors, and a push loop built on top
+of Tidbyt’s existing device API. The name is a play on “tidbits”—small pieces of
+useful state delivered through Tidbyt.
+
+Codex can be working on several tasks while I’m focused somewhere else. One may
+be running, waiting for a decision, or quietly stuck. The wall gives me one
+answer at a glance: what is running, what finished, and what needs me.
 
 Tidbyts puts that state on four tiny displays around my office. In my normal
 setup, a Codex Desktop automation runs every fifteen minutes, checks current
