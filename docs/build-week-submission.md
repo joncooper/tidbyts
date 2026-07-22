@@ -8,11 +8,10 @@
   Tidbyt displays I already owned—what’s running, what finished, and what needs me.
 - **Built with:** Codex Desktop, GPT-5.6 (`gpt-5.6-sol`), TypeScript, Cloudflare Workers,
   D1, Pixlet, Starlark, Vitest, Wrangler
-- **YouTube title:** I Gave Codex Four Tiny Screens
-- **YouTube description opener:** Tidbyt made the displays and still runs the
-  platform. I already owned four original units. TIDBYTS is my Build Week
-  software project: Codex learned Tidbyt’s Pixlet/Starlark stack, built the
-  views, and now runs the local refresh loop.
+- **YouTube title:** I Gave Codex Four Tiny Screens — TIDBYTS
+- **YouTube description opener:** I already owned four original Tidbyt
+  displays. TIDBYTS gives them a new job: Codex turns them into a quiet status
+  wall for the work itself.
 - **Repository:** `https://github.com/joncooper/tidbyts`
 - **Live demo:** https://tidbyts.jon-cooper.workers.dev/demo/
 - **YouTube:** https://youtu.be/Xzd62OyThJ4
@@ -34,26 +33,36 @@ or unsanitized conversions.
 
 ## YouTube upload copy
 
-**Title:** I Gave Codex Four Tiny Screens
+**Title:** I Gave Codex Four Tiny Screens — TIDBYTS
 
 **Description:**
 
-> Tidbyt made the displays and still runs the platform. I already owned four
-> original units. TIDBYTS is my Build Week software project: Codex learned
-> Tidbyt’s Pixlet/Starlark stack, built the views, and now runs the local refresh
-> loop. One glance tells me what is running, what finished, and what needs me.
+> I already owned four original Tidbyt displays. TIDBYTS gives them a new job:
+> Codex turns them into a quiet status wall for the work itself. One glance
+> tells me what’s running, what finished, and what needs me.
 >
-> Codex had two jobs here. First, it helped me build the Worker, collectors,
-> Pixlet apps, and tests with GPT-5.6. Its second job is a recurring local
-> automation that checks the system and refreshes the wall every fifteen
-> minutes. Prompts, code, transcripts, tool calls, and file paths stay out of
-> the shared service.
+> Tidbyt made the hardware and operates the platform. TIDBYTS is my independent
+> Build Week software project—a play on “tidbits.”
 >
-> Live demo: https://tidbyts.jon-cooper.workers.dev/demo/
+> Codex had two jobs. First, working with GPT-5.6, it learned Tidbyt’s
+> Pixlet/Starlark tools and helped me build the display apps, local collectors,
+> Worker, tests, and live demo. Then it stayed on as a local automation: every
+> fifteen minutes, it checks my system and refreshes the wall. Prompts, code,
+> transcripts, tool calls, and file paths stay on my Mac.
 >
-> Source: https://github.com/joncooper/tidbyts
+> The result is a passive information radiator with a living Codex operator
+> behind it. As my work changes, Codex can learn a new check and tailor what the
+> displays show—while every screen stays quiet and glanceable.
 >
-> 0:00 Four tiny displays<br>
+> Built for OpenAI Build Week in the Developer Tools track.
+>
+> Try it—no Tidbyt or login required:<br>
+> https://tidbyts.jon-cooper.workers.dev/demo/
+>
+> Source:<br>
+> https://github.com/joncooper/tidbyts
+>
+> 0:00 Four original Tidbyt displays<br>
 > 0:18 One useful fact from across the room<br>
 > 0:37 Codex’s second job<br>
 > 0:58 Work made visible<br>
