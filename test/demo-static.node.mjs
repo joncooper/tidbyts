@@ -42,7 +42,7 @@ const expectedStates = {
     ],
   },
   privacy: {
-    title: "The private work stays on this Mac.",
+    title: "The private work stays on my Mac.",
     architecture: true,
   },
 };

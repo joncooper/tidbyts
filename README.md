@@ -1,23 +1,23 @@
-# Tidbyts — Codex status apps for Tidbyt
+# TIDBYTS — Codex status apps for Tidbyt
 
 [![CI](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml/badge.svg)](https://github.com/joncooper/tidbyts/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-56e0d2.svg)](LICENSE)
 
-*[Tidbyt](https://tidbyt.com/) made the hardware. Tidbyts is the software layer I
+*[Tidbyt](https://tidbyt.com/) made the hardware. TIDBYTS is the software layer I
 built for four original Tidbyt displays I already owned.*
 
 The name is a play on “tidbits”: small pieces of useful state, delivered through
-Tidbyt. For Build Week, I used Codex to learn Tidbyt’s Pixlet/Starlark app stack,
+Tidbyt. For Build Week, I had Codex learn Tidbyt’s Pixlet/Starlark app stack,
 build new 64×32 views, and push fresh renders through the official device API.
 Codex then stayed on as the recurring local automation that decides what matters,
 checks the system, and refreshes the wall.
 
-The result shows what Codex is doing, what just finished, how the computer is
-doing, and the one problem that needs me. No phone, no dashboard, no notification
+The result shows what Codex is doing, what just finished, whether the computer
+is healthy, and the one problem that needs me. No phone, no dashboard, no notification
 in my pocket. A small Cloudflare service handles only content-free usage records,
 pull-request totals, and the household score.
 
-## What Tidbyts adds
+## What TIDBYTS adds
 
 <table>
   <tr>
@@ -121,8 +121,8 @@ checklist, and testing instructions live in
 
 ## Built with Codex, kept current by Codex
 
-**Tidbyts — A quiet status wall for Codex** is a Developer Tools entry for
-OpenAI Build Week. I built it with Codex Desktop and GPT-5.6 Sol in the July 18
+**TIDBYTS** is a Developer Tools entry for OpenAI Build Week. I built it with
+Codex Desktop and GPT-5.6 (`gpt-5.6-sol`) in the July 18
 core-build session `019f76ab-6b0a-7d73-a7dd-7e3bc30bb31f`; the session metadata
 records `gpt-5.6-sol`. Codex helped me connect the collectors, Worker/D1 path,
 and Pixlet apps, then test working, ready, healthy, and failure states at the
@@ -134,7 +134,14 @@ on its second job. In normal use, a continuing local automation runs the refresh
 loop every fifteen minutes. I can teach that same task another check as my setup
 changes without making the displays any busier.
 
-**Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers, D1,
+The exact schedule, task brief, privacy contract, and refresh flow are checked
+in as the [TIDBYTS Codex automation recipe](docs/codex-automation.md).
+
+TIDBYTS is a passive information radiator with a living Codex operator behind
+it. As the work changes, Codex can learn a new check and tailor what the wall
+shows without making any one display busier.
+
+**Built with:** Codex Desktop, GPT-5.6 (`gpt-5.6-sol`), TypeScript, Cloudflare Workers, D1,
 Pixlet, Starlark, Vitest, and Wrangler.
 
 ## How it works
@@ -172,7 +179,7 @@ runs locally and pushes completed WebP animations through the device API.
 same rendering pipeline can move to community firmware later if that becomes
 the better home for the hardware.
 
-**Private by default.** Tidbyts never copies prompts, code, transcript text,
+**Private by default.** TIDBYTS never copies prompts, code, transcript text,
 tool calls, file paths, PR titles, or PR bodies into its Worker, D1 database, or
 Tidbyt payloads. The Worker receives small usage records—timestamps,
 provider/model identifiers, and token counts—plus PR totals and explicitly

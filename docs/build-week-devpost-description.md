@@ -1,13 +1,13 @@
-### Four original Tidbyt displays, one new job
+### Four original displays. One new job.
 
 [Tidbyt](https://tidbyt.com/) made these displays and still runs the platform
 behind them. I already owned four original devices, cycling through weather,
 sports, and the existing Tidbyt app library.
 
-**Tidbyts is my software project, not the hardware.** The name is a play on
+**TIDBYTS is my software project, not the hardware.** The name is a play on
 “tidbits”: small pieces of useful information delivered through Tidbyt. For
-Build Week, I used Codex to learn Tidbyt’s Pixlet/Starlark app stack, build new
-64×32 views, push them through the official device API, and stay on as the local
+Build Week, Codex learned Tidbyt’s Pixlet/Starlark app stack, built new 64×32
+views, pushed them through the official device API, and stayed on as the local
 automation that keeps the wall current.
 
 ### I wanted the answer from across the room
@@ -44,11 +44,12 @@ The displays are intentionally quiet. Animation communicates state; it doesn’t
 decorate the screen. Healthy systems recede. The one exception that needs
 action becomes impossible to miss.
 
-### Codex has two jobs here
+### Codex built it. Then Codex stayed on.
 
-First, Codex helped me build Tidbyts. During Build Week I used Codex Desktop
-with **GPT-5.6 Sol** to connect the TypeScript collectors, Cloudflare Worker and
-D1 database, Pixlet/Starlark apps, and the test suite. It also helped test
+First, Codex helped me build TIDBYTS. During Build Week, I used Codex Desktop
+with **GPT-5.6 (`gpt-5.6-sol`)** to connect the TypeScript collectors,
+Cloudflare Worker and D1 database, Pixlet/Starlark apps, and the test suite. It
+also helped test
 awkward display states such as long labels, two-digit counts, healthy fallbacks,
 and failures at the actual 64×32 resolution. The primary July 18 build session
 is `019f76ab-6b0a-7d73-a7dd-7e3bc30bb31f`.
@@ -63,7 +64,7 @@ busier.
 That is the part I find most useful: the wall stays simple even as the monitor
 behind it evolves.
 
-### The private work stays on this Mac
+### The private work stays on my Mac
 
 Prompts, code, transcripts, tool calls, file paths, PR titles, and PR bodies stay
 local. They are not copied into the Worker, D1 database, or Tidbyt payloads.
@@ -92,18 +93,22 @@ usage signals, and the privacy architecture directly in the browser. The
 repository also includes deterministic Worker/D1 tests and Pixlet render tests
 for normal, active, alert, and maximum-width states.
 
-### Why four old screens matter
+For a local run: `npm ci`, `npm run dev`, then open
+`http://localhost:8787/demo/`. Run `npm test` for the deterministic test suite.
 
-The point is not to put more data in the room. It is to protect focus. Tidbyts
-lets active work remain visible without turning every change into a notification
-or every question into a dashboard visit.
+### What I stopped checking
 
-The same pattern can extend beyond my desk: let a local Codex automation watch
-the changing systems a developer cares about, keep the private work local, and
-give the room one clear signal only when attention is useful.
+The useful part is what I stop doing: checking dashboards. Active work stays
+visible without turning every change into a notification.
 
-Four old displays are enough to make that idea tangible. When something needs
-me, I just look up.
+TIDBYTS is a passive information radiator with a living Codex operator behind
+it. As my work changes, Codex can learn new checks and tailor what the wall
+shows—without making each display busier. It is an ambient-observability pattern
+for developers running several long-lived local agents: keep private context
+local, export only state, and interrupt only when attention is useful.
 
-*Tidbyt is the existing hardware and platform; Tidbyts is this independent
+Four original Tidbyt displays now answer the question I kept opening dashboards
+to ask: does anything need me? Usually, I just look up.
+
+*Tidbyt is the existing hardware and platform; TIDBYTS is this independent
 Codex-powered software project.*

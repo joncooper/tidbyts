@@ -1,16 +1,16 @@
-# OpenAI Build Week submission — Tidbyts
+# OpenAI Build Week submission — TIDBYTS
 
 ## Submission fields
 
-- **Title:** Tidbyts: Codex status apps for Tidbyt
+- **Title:** TIDBYTS
 - **Track:** Developer Tools
 - **Tagline:** Codex builds and refreshes tiny status apps for four original
   Tidbyt displays I already owned—what’s running, what finished, and what needs me.
-- **Built with:** Codex Desktop, GPT-5.6 Sol, TypeScript, Cloudflare Workers,
+- **Built with:** Codex Desktop, GPT-5.6 (`gpt-5.6-sol`), TypeScript, Cloudflare Workers,
   D1, Pixlet, Starlark, Vitest, Wrangler
 - **YouTube title:** I Gave Codex Four Tiny Screens
 - **YouTube description opener:** Tidbyt made the displays and still runs the
-  platform. I already owned four original units. Tidbyts is my Build Week
+  platform. I already owned four original units. TIDBYTS is my Build Week
   software project: Codex learned Tidbyt’s Pixlet/Starlark stack, built the
   views, and now runs the local refresh loop.
 - **Repository:** `https://github.com/joncooper/tidbyts`
@@ -20,22 +20,17 @@
 
 ## Devpost gallery order
 
-Lead with a real-hardware photograph, then the polished software view, as proof
-that this independent software project runs on original Tidbyt hardware:
+The live carousel alternates orientations and resolves from active work to calm:
 
-1. `docs/screenshots/hardware/all-clear-on-hardware.jpg` — “When nothing needs
-   attention, the display stays calm.”
-2. `docs/screenshots/submission/demo-control-16x9.png` — “Current work, recent
-   activity, background jobs, and the one task waiting for me.”
-3. `docs/screenshots/hardware/landed-prs-on-hardware.jpg` — “Merged work becomes
-   visible without checking GitHub.”
-4. `docs/screenshots/submission/demo-exception-16x9.png` — “The monitor can
-   evolve; the display still only needs to say what changed.”
+1. Film — the immediate “JUST LOOK UP” hook.
+2. `codex-control-tower-on-hardware.jpg` — Codex work on original hardware.
+3. `landed-prs-on-hardware.jpg` — merged work without opening GitHub.
+4. `glint-working-on-hardware.jpg` — progress without another notification.
+5. `all-clear-on-hardware.jpg` — the calm resolution.
 
-Every gallery asset is 16:9, sRGB, and under 1 MB. Publish only these prepared
-derivatives. The hardware photographs have been resized and stripped of GPS,
-device, capture-time, and other source metadata. Do not upload the original HEIC
-files or unsanitized conversions.
+The hardware photographs have been resized and stripped of GPS, device,
+capture-time, and other source metadata. Do not upload the original HEIC files
+or unsanitized conversions.
 
 ## YouTube upload copy
 
@@ -44,7 +39,7 @@ files or unsanitized conversions.
 **Description:**
 
 > Tidbyt made the displays and still runs the platform. I already owned four
-> original units. Tidbyts is my Build Week software project: Codex learned
+> original units. TIDBYTS is my Build Week software project: Codex learned
 > Tidbyt’s Pixlet/Starlark stack, built the views, and now runs the local refresh
 > loop. One glance tells me what is running, what finished, and what needs me.
 >
@@ -73,7 +68,7 @@ thumbnail. The live demo URL belongs above the source link in the description.
 ## Project description
 
 Tidbyt made the hardware and still runs the platform. I already owned four
-original 64×32 displays. Tidbyts is my independent software project: a local
+original 64×32 displays. TIDBYTS is my independent software project: a local
 Codex automation, Pixlet/Starlark apps, collectors, and a push loop built on top
 of Tidbyt’s existing device API. The name is a play on “tidbits”—small pieces of
 useful state delivered through Tidbyt.
@@ -82,14 +77,14 @@ Codex can be working on several tasks while I’m focused somewhere else. One ma
 be running, waiting for a decision, or quietly stuck. The wall gives me one
 answer at a glance: what is running, what finished, and what needs me.
 
-Tidbyts puts that state on four tiny displays around my office. In my normal
+TIDBYTS puts that state on four tiny displays around my office. In my normal
 setup, a Codex Desktop automation runs every fifteen minutes, checks current
 Codex work plus machine and project health, renders a new 64×32 view, and sends
 it to the displays. Control Tower shows what is active and what needs me.
 Exception Screen stays quiet until something breaks. Glint makes progress and
 completion visible without demanding attention.
 
-Tidbyts never copies prompts, code, transcripts, tool calls, file paths, PR
+TIDBYTS never copies prompts, code, transcripts, tool calls, file paths, PR
 titles, or PR bodies into its Worker, D1 database, or Tidbyt payloads. The
 optional shared service receives small usage records—timestamps, model/provider
 IDs, and token counts—plus pull-request totals and explicitly entered household
@@ -100,7 +95,7 @@ Codex has two jobs here. It helped me build the Worker, collectors, Pixlet apps,
 and tests. Then a continuing local Codex automation took over the refresh loop:
 every fifteen minutes it checks the system and redraws the wall. I can teach
 that same task a new check as my setup changes while the displays remain simple.
-Tidbyts answers one question from across the room: does anything need me right
+TIDBYTS answers one question from across the room: does anything need me right
 now?
 
 ## How Codex and GPT-5.6 were used
@@ -180,7 +175,7 @@ not needed to evaluate the software: the static demo, generated product images,
 render scripts, and test suite show the core states and their behavior. Live
 installations require a Tidbyt API key, but no credentials, prompts, local
 paths, transcript text, or private operational data are included in this
-repository or submission. Tidbyts does not forward those private fields to its
+repository or submission. TIDBYTS does not forward those private fields to its
 Worker, D1 database, or Tidbyt payloads.
 
 ## Final Creator preflight
@@ -223,7 +218,7 @@ the ignored `renders/build-week/stale-pre-polish/` directory.
 
 ## Submission record
 
-- [x] Public repository pushed at commit `c719f11` with an MIT license and
+- [x] Public repository pushed with an MIT license and
   passing CI.
 - [x] Static judge demo deployed and verified in signed-out desktop and mobile
   browsers, including every screen and state control.
@@ -231,5 +226,5 @@ the ignored `renders/build-week/stale-pre-polish/` directory.
   English captions, chapters, and a clean copyright check.
 - [x] Devpost entry submitted to **Developer Tools** with the live demo, public
   film, repository, testing instructions, and core-build Session ID.
-- [x] Submission published July 21, 2026 at 7:10 p.m. ET, before the 8:00 p.m.
-  ET deadline: https://devpost.com/software/tidbyts-a-quiet-status-wall-for-codex
+- [x] Submission first published July 21, 2026 at 7:10 p.m. ET and remains
+  submitted: https://devpost.com/software/tidbyts-a-quiet-status-wall-for-codex

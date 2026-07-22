@@ -3,26 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Explore Tidbyts, a Codex-powered software and automation layer for four original Tidbyt displays.">
-    <title>Tidbyts — when something needs me, I just look up</title>
+    <meta name="description" content="Explore TIDBYTS, a Codex-powered software and automation layer for four original Tidbyt displays.">
+    <title>TIDBYTS — when something needs me, I just look up</title>
     <link rel="stylesheet" href="/demo/styles.css">
   </head>
   <body>
     <main id="top">
       <header class="site-header">
-        <a class="wordmark" href="#top" aria-label="Tidbyts home">TIDBYTS</a>
+        <a class="wordmark" href="#top" aria-label="TIDBYTS home">TIDBYTS</a>
         <a class="source-link" href="https://github.com/joncooper/tidbyts">View source <span aria-hidden="true">↗</span></a>
       </header>
 
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="kicker">ORIGINAL TIDBYT HARDWARE · ONE LOCAL CODEX AUTOMATION</p>
+          <p class="kicker">FOUR ORIGINAL TIDBYT DISPLAYS · ONE LOCAL CODEX AUTOMATION</p>
           <h1 id="page-title">When something needs me, I just look up.</h1>
-          <p class="lede">Tidbyt made the displays and platform; I already owned four original units. Tidbyts is the Codex-powered software layer I built for them—local automation that keeps the wall current with what’s running, what finished, and what needs me.</p>
+          <p class="lede">I already owned four original Tidbyt displays. With Codex, I turned them into a living status wall—a local automation that shows what’s running, what finished, and what needs me.</p>
+          <a class="primary-action" href="#demo-title">Explore the live wall <span aria-hidden="true">↓</span></a>
           <p class="trust-line"><span>Local operator</span><span>Private by default</span><span>64×32 pixels</span></p>
         </div>
 
-        <div class="hero-product" aria-label="Four original Tidbyt displays showing real Pixlet renders">
+        <div class="hero-product" aria-label="Original Tidbyt hardware and four real Pixlet renders">
+          <figure class="hardware-photo">
+            <img src="/demo/assets/all-clear-on-hardware.jpg" alt="An original walnut Tidbyt display showing the TIDBYTS All Clear system state in a real room">
+            <figcaption>ON MY DESK · ORIGINAL TIDBYT HARDWARE</figcaption>
+          </figure>
           <p class="product-label"><span aria-hidden="true"></span> REAL PIXLET RENDERS</p>
           <div class="screen-wall">
             <figure class="hero-screen">
@@ -42,7 +47,7 @@
               <figcaption>Delivery</figcaption>
             </figure>
           </div>
-          <p class="product-proof">Real Pixlet output for original Tidbyt hardware. Tidbyt made the display; this project supplies the Codex-driven views and refresh loop.</p>
+          <p class="product-proof">Tidbyt made the hardware and operates the platform. TIDBYTS supplies the Codex-driven views and refresh loop.</p>
         </div>
       </section>
 
@@ -58,7 +63,7 @@
             <div class="display-bezel">
               <div id="pixel-surface" class="pixel-surface">
                 <img id="state-image" src="/demo/assets/control-tower-active.webp" alt="Codex Control Tower showing current, recent, and background work">
-                <div id="architecture" class="architecture" hidden aria-label="Tidbyts privacy boundary">
+                <div id="architecture" class="architecture" hidden aria-label="TIDBYTS privacy boundary">
                   <p class="architecture-label">WHAT STAYS WHERE</p>
                   <div class="arch-node arch-local"><strong>Local Codex</strong><span>watches the work</span></div>
                   <span class="arch-arrow" aria-hidden="true">→</span>
@@ -73,7 +78,7 @@
             </div>
           </div>
 
-          <div class="controls" role="tablist" aria-label="Signals on the Tidbyts wall">
+          <div class="controls" role="tablist" aria-label="Signals on the TIDBYTS wall">
             <button id="state-tab-control" type="button" role="tab" aria-selected="true" aria-controls="state-copy" tabindex="0" data-state="control">Codex</button>
             <button id="state-tab-exception" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="exception">System</button>
             <button id="state-tab-glint" type="button" role="tab" aria-selected="false" aria-controls="state-copy" tabindex="-1" data-state="glint">Glint</button>
@@ -87,13 +92,13 @@
         </div>
       </section>
 
-      <section class="proof" aria-label="How to test Tidbyts">
+      <section class="proof" aria-label="How to test TIDBYTS">
         <div>
-          <p class="kicker">NO TIDBYT? NO PROBLEM.</p>
-          <h2>Test the work, not the hardware.</h2>
-          <p>This tour is completely static. The repository includes sample data, unit tests, and Pixlet render checks, so anyone can review the real product without a device, login, API key, or private metrics.</p>
+          <p class="kicker">A LIVING MONITOR · A QUIET WALL</p>
+          <h2>The wall changes. The question stays simple.</h2>
+          <p>TIDBYTS is a passive information radiator with a living Codex operator behind it. As my work changes, Codex can learn a new check and tailor what the displays show—while every screen stays quiet and glanceable. This static tour proves the same views without hardware, credentials, or private data.</p>
         </div>
-        <pre aria-label="Commands to test Tidbyts"><code>npm ci
+        <pre aria-label="Commands to test TIDBYTS"><code>npm ci
 npm test
 npm run test:pixlet
 npm run demo:assets</code></pre>

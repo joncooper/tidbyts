@@ -1,7 +1,7 @@
 const states = {
   control: {
     title: "Know what Codex is doing.",
-    text: "A Codex automation running on this Mac gathers current work, recent finishes, background jobs, and anything waiting on me in one place.",
+    text: "A Codex automation running on my Mac gathers current work, recent finishes, background jobs, and anything waiting on me in one place.",
     frames: [
       { label: "Working", src: "/demo/assets/control-tower-active.webp", alt: "Codex Control Tower showing current, recent, and background work" },
       { label: "Needs me", src: "/demo/assets/control-tower-attention.webp", alt: "Codex Control Tower showing one task ready for a response" },
@@ -12,8 +12,8 @@ const states = {
     title: "Teach it what to watch.",
     text: "It currently checks builds, disk space, services, cloud health, and optional spending limits. When my setup changes, I can give Codex a new check without making the display any busier.",
     frames: [
-      { label: "Attention", src: "/demo/assets/exception-critical.gif", alt: "Tidbyts rotating between a failed CI check and stale data" },
-      { label: "All clear", src: "/demo/assets/exception-healthy.webp", alt: "Tidbyts showing that every monitored system is healthy" },
+      { label: "Attention", src: "/demo/assets/exception-critical.gif", alt: "Exception Screen cycling between a failed CI check and stale data" },
+      { label: "All clear", src: "/demo/assets/exception-healthy.webp", alt: "Exception Screen showing that every monitored system is healthy" },
     ],
   },
   glint: {
@@ -27,15 +27,15 @@ const states = {
   },
   delivery: {
     title: "See the work land.",
-    text: "Merged pull requests show what landed. AI usage shows how much ran. Both stay readable at a glance.",
+    text: "Merged pull requests show what landed. Token totals show how much Codex and Claude ran. Both stay readable at a glance.",
     frames: [
       { label: "Pull requests", src: "/demo/assets/landed-prs.png", alt: "Pull requests landed over 24 hours, 7 days, and 30 days" },
       { label: "Model use", src: "/demo/assets/token-use.png", alt: "Codex and Claude token usage over 30 days" },
     ],
   },
   privacy: {
-    title: "The private work stays on this Mac.",
-    text: "Prompts, code, transcripts, tool calls, paths, and pull-request text stay on this Mac. The shared service can receive only small, content-free records—such as AI usage and landed-PR totals—and only when that feature is enabled.",
+    title: "The private work stays on my Mac.",
+    text: "Prompts, code, transcripts, tool calls, paths, and pull-request text stay on my Mac. The shared service can receive only small, content-free records—such as AI usage and landed-PR totals—and only when that feature is enabled.",
     architecture: true,
     caption: "The privacy boundary, in plain English. Every product state above is an actual Pixlet render.",
   },
